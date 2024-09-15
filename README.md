@@ -1,5 +1,7 @@
 # Cascaded-U-Net-for-Whole-heart-segmentation-
 
+The following code can be used for training and making predictions with a two-staged cascaded U-Net segmentation model. It has been used specifically for whole heart segmentation on 7 different labels. 
+
 ## Training:
 
 ### First stage:
