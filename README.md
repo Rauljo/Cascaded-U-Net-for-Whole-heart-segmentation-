@@ -2,6 +2,22 @@
 
 The following code can be used for training and making predictions with a two-staged cascaded U-Net segmentation model. It has been used specifically for whole heart segmentation on 7 different labels. 
 
+## If you just want to use the pretrained models on your images and receive the final segmentation
+
+### First execute prediction
+
+`python Prediccion.py --model_pred="pretrained_models/2stage.ckpt" --model_crop="pretrained_models/1stage.ckpt" --images_folder=<YOUR IMAGE FOLDER> --destination_folder=<YOUR DESTINATION FOLDER> --tam_pred=192 --tam_crop=128 --crop_margin=0.15`
+
+with --cuda=1 if you want to use GPU
+
+### Then execute postprocessing
+
+`python postprocesado.py --source_folder=<PREVIOUS DESTINATION FOLDER> --largest_pulmonar=1`
+
+## Required dependencies 
+
+torch, pytorch_lightning, nibabel, SimpleITK==2.2.1, torchio, tensorboard, matplotlib, scikit-learn
+
 ## Training:
 
 ### First stage:
@@ -39,6 +55,7 @@ Just need to execute `python Prediccion.py` with the desired arguments:
 - tam_pred: size in which the second stage model works
 - tam_crop: size in which the first stage model works
 - crop_margin: the margin on each dimension to use for the crop (<1)
+- cuda: 0 if you want to use cpu (default) or 1 if you want to use cuda (gpu)
 
 ## Postprocessing:
 

@@ -33,6 +33,7 @@ parser.add_argument('--tam_pred', help="Size of the images the model was trained
 parser.add_argument('--tam_crop', help="Size of the images the model_crop was trained at", type=int, default=128)
 #optional: CROP TYPE
 parser.add_argument('--crop_margin', help="The margin on each dimension used to crop the single label predicted image", type=float, default=0.15)
+parser.add_argument('--cuda', help="Use cuda for the prediction", type=int, default=0)
 
 args = parser.parse_args()
 
@@ -46,8 +47,11 @@ tiempos_crop = []
 #CARGAMOS LOS MODELOS ENVIADOS
 
 #Verificamos si CUDA está disponible
-#device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
-device = 'cpu'
+print(args.cuda)
+if (args.cuda == 1):
+    device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
+else:
+    device = 'cpu'
 
 if (args.model_crop == "None"):
     VERSION = "Solo segunda"
